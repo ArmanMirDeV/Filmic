@@ -34,10 +34,10 @@ export default function AboutPage() {
                 className="relative aspect-video rounded-3xl overflow-hidden shadow-2xl border border-white/10"
             >
                 <Image 
-                    src="https://images.jdmagicbox.com/comp/jd_social/news/2018jul21/image-119206-zkypi64x2m.jpg" 
+                    src="/filmic-logo.png" 
                     alt="Cinematic Experience" 
                     fill 
-                    className="object-cover"
+                    className="object-cover h-full"
                 />
             </motion.div>
             

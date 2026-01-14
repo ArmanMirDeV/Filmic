@@ -4,13 +4,49 @@ import { MOVIES_DATA } from "@/data/movies";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Star, Clock, ChevronLeft, User, Film, PlayCircle, Share2, Calendar } from "lucide-react";
+import { Star, Clock, ChevronLeft, User, Film, PlayCircle, Share2, Calendar, Bookmark, BookmarkCheck } from "lucide-react";
 import { useParams } from "next/navigation";
+import { useState, useEffect } from "react";
+import Toast from "@/components/Toast";
 
 export default function MovieDetailsPage() {
   const params = useParams();
   const id = params.id;
   const movie = MOVIES_DATA.find((m) => m.id === parseInt(id));
+  
+  const [isInWishlist, setIsInWishlist] = useState(false);
+  const [toast, setToast] = useState({ visible: false, message: "", type: "success" });
+
+  useEffect(() => {
+    if (movie) {
+      const wishlist = JSON.parse(localStorage.getItem("filmic_wishlist") || "[]");
+      setIsInWishlist(wishlist.includes(movie.id));
+    }
+  }, [movie]);
+
+  const toggleWishlist = () => {
+    const wishlist = JSON.parse(localStorage.getItem("filmic_wishlist") || "[]");
+    let newWishlist;
+    let message = "";
+    let type = "success";
+
+    if (isInWishlist) {
+      newWishlist = wishlist.filter(item => item !== movie.id);
+      message = `${movie.title} removed from your watchlist.`;
+      type = "update";
+    } else {
+      newWishlist = [...wishlist, movie.id];
+      message = `${movie.title} added to your personal watchlist!`;
+      type = "success";
+    }
+
+    localStorage.setItem("filmic_wishlist", JSON.stringify(newWishlist));
+    setIsInWishlist(!isInWishlist);
+    
+    // Show Toast
+    setToast({ visible: true, message, type });
+    setTimeout(() => setToast({ ...toast, visible: false }), 4000);
+  };
 
   if (!movie) {
     return (
@@ -31,6 +67,14 @@ export default function MovieDetailsPage() {
 
   return (
     <div className="min-h-screen bg-bg-base pb-20 overflow-x-hidden">
+      {/* Toast Notification */}
+      <Toast 
+        isVisible={toast.visible} 
+        message={toast.message} 
+        type={toast.type}
+        onClose={() => setToast({ ...toast, visible: false })}
+      />
+
       {/* Hero Header with Animated Gradient & Images */}
       <div className="relative h-[65vh] md:h-[80vh] w-full overflow-hidden">
         <motion.div 
@@ -200,7 +244,20 @@ export default function MovieDetailsPage() {
                         >
                             <PlayCircle size={24} /> Watch Trailer
                         </a>
-                        <button className="w-full py-4 bg-white/5 hover:bg-white/10 text-white rounded-2xl font-bold transition-all border border-white/10 flex items-center justify-center gap-3">
+                        
+                        <button 
+                            onClick={toggleWishlist}
+                            className={`w-full py-4 rounded-2xl font-black text-lg transition-all flex items-center justify-center gap-3 active:scale-95 border ${
+                                isInWishlist 
+                                ? 'bg-accent text-white border-accent shadow-xl shadow-accent/20' 
+                                : 'bg-white/5 hover:bg-white/10 text-white border-white/10'
+                            }`}
+                        >
+                            {isInWishlist ? <BookmarkCheck size={24} /> : <Bookmark size={24} />}
+                            {isInWishlist ? 'In Watchlist' : 'Want to Watch'}
+                        </button>
+
+                        <button className="w-full py-4 bg-transparent hover:bg-white/5 text-text-muted rounded-2xl font-bold transition-all flex items-center justify-center gap-3">
                             <Share2 size={20} /> Share Film
                         </button>
                     </div>

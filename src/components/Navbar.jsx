@@ -10,6 +10,7 @@ import Logo from "./Logo";
 const navLinks = [
   { name: "Home", href: "/" },
   { name: "Movies", href: "/movies" },
+  { name: "Wishlist", href: "/wishlist" },
   { name: "Add Movies", href: "/add-movies" },
   { name: "About", href: "/about" },
 ];
