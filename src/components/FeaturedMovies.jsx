@@ -30,9 +30,15 @@ export default function FeaturedMovies() {
   }, [getRandomMovies]);
 
   useEffect(() => {
-    if (carousel.current) {
+    const handleResize = () => {
+      if (carousel.current) {
         setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth);
-    }
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, [featuredMovies]);
 
   return (

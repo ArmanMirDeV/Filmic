@@ -42,6 +42,18 @@ const nextConfig = {
         protocol: "https",
         hostname: "images.moviesanywhere.com",
       },
+      {
+        protocol: "https",
+        hostname: "hips.hearstapps.com",
+      },
+      {
+        protocol: "https",
+        hostname: "image.tmdb.org",
+      },
+      {
+        protocol: "https",
+        hostname: "cdn.britannica.com",
+      },
     ],
   },
 };
