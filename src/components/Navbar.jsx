@@ -15,13 +15,15 @@ const navLinks = [
   { name: "About", href: "/about" },
 ];
 
+import { useAuth } from "@/context/AuthContext";
+
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const pathname = usePathname();
+  const { user, logout } = useAuth();
 
-  // Simulated User State
-  const isLoggedIn = true;
+  const isLoggedIn = !!user;
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-bg-base/80 backdrop-blur-md border-b border-bg-lighter">
@@ -67,8 +69,8 @@ export default function Navbar() {
                     onClick={() => setIsProfileOpen(!isProfileOpen)}
                     className="flex items-center gap-2 p-2 rounded-full hover:bg-bg-lighter transition-colors focus:outline-none"
                   >
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-bold">
-                      A
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-bold uppercase">
+                      {user.name.charAt(0)}
                     </div>
                     <ChevronDown size={16} className={`text-text-secondary transition-transform ${isProfileOpen ? 'rotate-180' : ''}`} />
                   </button>
@@ -83,20 +85,23 @@ export default function Navbar() {
                         className="absolute right-0 mt-2 w-48 bg-bg-medium border border-bg-lighter rounded-xl shadow-xl py-2 overflow-hidden ring-1 ring-black ring-opacity-5"
                       >
                          <div className="px-4 py-3 border-b border-bg-lighter">
-                          <p className="text-sm text-text-primary">Arman</p>
-                          <p className="text-xs text-text-muted truncate">user@example.com</p>
+                          <p className="text-sm text-text-primary font-bold">{user.name}</p>
+                          <p className="text-xs text-text-muted truncate">{user.email}</p>
                         </div>
                         <Link
-                          href="/profile"
+                          href="/wishlist"
                           className="flex items-center px-4 py-2 text-sm text-text-secondary hover:bg-bg-lighter hover:text-white transition-colors"
                           onClick={() => setIsProfileOpen(false)}
                         >
                           <User size={16} className="mr-2" />
-                          Profile
+                          My Cinema
                         </Link>
                         <button
                           className="w-full flex items-center px-4 py-2 text-sm text-secondary-accent hover:bg-bg-lighter transition-colors text-left"
-                          onClick={() => setIsProfileOpen(false)}
+                          onClick={() => {
+                            setIsProfileOpen(false);
+                            logout();
+                          }}
                         >
                           <LogOut size={16} className="mr-2" />
                           Sign out

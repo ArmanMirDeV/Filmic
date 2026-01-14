@@ -8,6 +8,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Bookmark, Star, PlayCircle, Trash2, film, ChevronRight } from "lucide-react";
 import Toast from "@/components/Toast";
 
+import ProtectedRoute from "@/components/ProtectedRoute";
+
 export default function WishlistPage() {
   const [wishlistMovies, setWishlistMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -40,10 +42,10 @@ export default function WishlistPage() {
     setTimeout(() => setToast({ ...toast, visible: false }), 4000);
   };
 
-  if (isLoading) return <div className="min-h-screen bg-bg-base" />;
-
   return (
-    <div className="min-h-screen bg-bg-base py-12 md:py-24 px-4 sm:px-6 lg:px-8">
+    <ProtectedRoute>
+      <div className="min-h-screen bg-bg-base py-12 md:py-24 px-4 sm:px-6 lg:px-8">
+
       <Toast 
         isVisible={toast.visible} 
         message={toast.message} 
@@ -149,6 +151,7 @@ export default function WishlistPage() {
           )}
         </AnimatePresence>
       </div>
-    </div>
+      </div>
+    </ProtectedRoute>
   );
 }

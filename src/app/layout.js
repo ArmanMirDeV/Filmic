@@ -20,17 +20,21 @@ export const metadata = {
     "A clean, cinematic movie library to discover, organize, and revisit your favorite films.",
 };
 
+import { AuthProvider } from "@/context/AuthContext";
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-bg-base text-text-primary flex flex-col min-h-screen`}
       >
-        <Navbar />
-        <main className="pt-20 flex-grow w-full max-w-7xl mx-auto">
-          {children}
-        </main>
-        <Footer />
+        <AuthProvider>
+          <Navbar />
+          <main className="pt-20 flex-grow w-full max-w-7xl mx-auto">
+            {children}
+          </main>
+          <Footer />
+        </AuthProvider>
       </body>
     </html>
   );
