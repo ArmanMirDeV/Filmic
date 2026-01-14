@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Filmic",
+  title: "Filmic - Movie Library",
   description:
     "A clean, cinematic movie library to discover, organize, and revisit your favorite films.",
 };

@@ -18,6 +18,30 @@ const nextConfig = {
         protocol: "https",
         hostname: "upload.wikimedia.org",
       },
+      {
+        protocol: "https",
+        hostname: "t4.ftcdn.net",
+      },
+      {
+        protocol: "https",
+        hostname: "play-lh.googleusercontent.com",
+      },
+      {
+        protocol: "https",
+        hostname: "resizing.flixster.com",
+      },
+      {
+        protocol: "https",
+        hostname: "encrypted-tbn0.gstatic.com",
+      },
+      {
+        protocol: "https",
+        hostname: "lumiere-a.akamaihd.net",
+      },
+      {
+        protocol: "https",
+        hostname: "images.moviesanywhere.com",
+      },
     ],
   },
 };
