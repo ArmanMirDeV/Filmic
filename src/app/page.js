@@ -2,6 +2,7 @@ import Hero from "@/components/Hero";
 import FeaturedMovies from "@/components/FeaturedMovies";
 import MovieSpotlight from "@/components/MovieSpotlight";
 import BestActors from "@/components/BestActors";
+import StudioPartners from "@/components/StudioPartners";
 import WhyFilmic from "@/components/WhyFilmic";
 import CinemaQuotes from "@/components/CinemaQuotes";
 
@@ -12,6 +13,7 @@ export default function Home() {
       <FeaturedMovies />
       <MovieSpotlight />
       <BestActors />
+      <StudioPartners />
       <WhyFilmic />
       <CinemaQuotes />
       {/* Additional sections will go here */}
