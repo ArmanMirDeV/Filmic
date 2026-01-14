@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-bg-base text-text-primary flex flex-col min-h-screen`}
       >
         <Navbar />
-        <main className="pt-20 flex-grow">
+        <main className="pt-20 flex-grow w-full max-w-7xl mx-auto">
           {children}
         </main>
         <Footer />
