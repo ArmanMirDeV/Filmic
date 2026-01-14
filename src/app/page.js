@@ -2,6 +2,7 @@ import Hero from "@/components/Hero";
 import FeaturedMovies from "@/components/FeaturedMovies";
 import MovieSpotlight from "@/components/MovieSpotlight";
 import WhyFilmic from "@/components/WhyFilmic";
+import CinemaQuotes from "@/components/CinemaQuotes";
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
       <FeaturedMovies />
       <MovieSpotlight />
       <WhyFilmic />
+      <CinemaQuotes />
       {/* Additional sections will go here */}
     </div>
   );
